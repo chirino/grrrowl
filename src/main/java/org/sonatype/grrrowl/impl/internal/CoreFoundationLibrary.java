@@ -19,7 +19,6 @@ package org.sonatype.grrrowl.impl.internal;
 import org.fusesource.hawtjni.runtime.JniArg;
 import org.fusesource.hawtjni.runtime.JniClass;
 import org.fusesource.hawtjni.runtime.JniMethod;
-import org.fusesource.hawtjni.runtime.Library;
 
 import static org.fusesource.hawtjni.runtime.ArgFlag.*;
 import static org.fusesource.hawtjni.runtime.MethodFlag.*;
@@ -32,30 +31,25 @@ import static org.fusesource.hawtjni.runtime.MethodFlag.*;
  */
 @JniClass(conditional="defined(__APPLE__)")
 public class CoreFoundationLibrary
+    extends LibrarySupport
 {
-    private static final Library LIBRARY = new Library("grrrowl", CoreFoundationLibrary.class);
-
-    static {
-        LIBRARY.load();
-    }
-
     @JniMethod
     public static native void CFRetain(
-        @JniArg(cast="id", flags={POINTER_ARG}) long cfTypeRef);
+        @JniArg(cast=ID, flags={POINTER_ARG}) long cfTypeRef);
 
     @JniMethod
     public static native void CFRelease(
-        @JniArg(cast="id", flags={POINTER_ARG}) long cfTypeRef);
+        @JniArg(cast=ID, flags={POINTER_ARG}) long cfTypeRef);
 
-    @JniMethod(cast="id", flags={POINTER_RETURN})
+    @JniMethod(cast=ID, flags={POINTER_RETURN})
     public static native long CFStringCreateWithCString(
-        @JniArg(cast="id", flags={POINTER_ARG}) long allocator,
+        @JniArg(cast=ID, flags={POINTER_ARG}) long allocator,
         String string,
         int encoding);
 
-    @JniMethod(cast="id", flags={POINTER_RETURN})
+    @JniMethod(cast=ID, flags={POINTER_RETURN})
     public static native long CFStringCreateWithBytes(
-        @JniArg(cast="id", flags={POINTER_ARG}) long allocator,
+        @JniArg(cast=ID, flags={POINTER_ARG}) long allocator,
         byte[] bytes,
         int byteCount,
         int encoding,

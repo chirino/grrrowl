@@ -19,7 +19,6 @@ package org.sonatype.grrrowl.impl.internal;
 import org.fusesource.hawtjni.runtime.JniArg;
 import org.fusesource.hawtjni.runtime.JniClass;
 import org.fusesource.hawtjni.runtime.JniMethod;
-import org.fusesource.hawtjni.runtime.Library;
 
 import static org.fusesource.hawtjni.runtime.ArgFlag.*;
 import static org.fusesource.hawtjni.runtime.MethodFlag.*;
@@ -32,29 +31,24 @@ import static org.fusesource.hawtjni.runtime.MethodFlag.*;
  */
 @JniClass(conditional="defined(__APPLE__)")
 public class FoundationLibrary
+    extends LibrarySupport
 {
-    private static final Library LIBRARY = new Library("grrrowl", FoundationLibrary.class);
-
-    static {
-        LIBRARY.load();
-    }
-
-    @JniMethod(cast = "SEL", flags = {POINTER_RETURN})
+    @JniMethod(cast = SEL, flags = {POINTER_RETURN})
     public static native long sel_registerName(String selectorName);
 
-    @JniMethod(cast = "id", flags = {POINTER_RETURN})
+    @JniMethod(cast = ID, flags = {POINTER_RETURN})
     public static native long objc_getClass(String className);
 
-    @JniMethod(cast = "id", flags = {POINTER_RETURN}, accessor = "objc_msgSend")
+    @JniMethod(cast = ID, flags = {POINTER_RETURN}, accessor = "objc_msgSend")
     public static native long $(
-        @JniArg(cast = "id", flags = {POINTER_ARG}) long id,
-        @JniArg(cast = "SEL", flags = {POINTER_ARG}) long sel
+        @JniArg(cast = ID, flags = {POINTER_ARG}) long id,
+        @JniArg(cast = SEL, flags = {POINTER_ARG}) long sel
     );
 
-    @JniMethod(cast = "id", flags = {POINTER_RETURN}, accessor = "objc_msgSend")
+    @JniMethod(cast = ID, flags = {POINTER_RETURN}, accessor = "objc_msgSend")
     public static native long $(
-        @JniArg(cast = "id", flags = {POINTER_ARG}) long id,
-        @JniArg(cast = "SEL", flags = {POINTER_ARG}) long sel,
+        @JniArg(cast = ID, flags = {POINTER_ARG}) long id,
+        @JniArg(cast = SEL, flags = {POINTER_ARG}) long sel,
         String arg0);
 
     //
