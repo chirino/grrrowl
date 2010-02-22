@@ -33,19 +33,21 @@ import static org.fusesource.hawtjni.runtime.MethodFlag.*;
 public class FoundationLibrary
     extends LibrarySupport
 {
+    private static final String OBJC_MSG_SEND = "objc_msgSend";
+
     @JniMethod(cast = SEL, flags = {POINTER_RETURN})
     public static native long sel_registerName(String selectorName);
 
     @JniMethod(cast = ID, flags = {POINTER_RETURN})
     public static native long objc_getClass(String className);
 
-    @JniMethod(cast = ID, flags = {POINTER_RETURN}, accessor = "objc_msgSend")
+    @JniMethod(cast = ID, flags = {POINTER_RETURN}, accessor = OBJC_MSG_SEND)
     public static native long $(
         @JniArg(cast = ID, flags = {POINTER_ARG}) long id,
         @JniArg(cast = SEL, flags = {POINTER_ARG}) long sel
     );
 
-    @JniMethod(cast = ID, flags = {POINTER_RETURN}, accessor = "objc_msgSend")
+    @JniMethod(cast = ID, flags = {POINTER_RETURN}, accessor = OBJC_MSG_SEND)
     public static native long $(
         @JniArg(cast = ID, flags = {POINTER_ARG}) long id,
         @JniArg(cast = SEL, flags = {POINTER_ARG}) long sel,
