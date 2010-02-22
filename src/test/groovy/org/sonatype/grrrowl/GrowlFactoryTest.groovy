@@ -18,7 +18,6 @@ package org.sonatype.grrrowl
 
 import org.junit.Test
 import org.sonatype.grrrowl.impl.AppleScriptGrowl
-import org.sonatype.grrrowl.impl.NativeGrowl
 import org.sonatype.grrrowl.impl.NullGrowl
 
 /**
@@ -36,12 +35,12 @@ class GrowlFactoryTest
         growl.growl("foo", "Test Null", "null")
     }
 
-    @Test
-    void testGrowlNative() {
-        System.setProperty(GrowlFactory.TYPE, NativeGrowl.class.name)
-        Growler growl = new Growler(getClass().name, "foo")
-        growl.growl("foo", "Test Native", "native")
-    }
+//    @Test
+//    void testGrowlNative() {
+//        System.setProperty(GrowlFactory.TYPE, NativeGrowl.class.name)
+//        Growler growl = new Growler(getClass().name, "foo")
+//        growl.growl("foo", "Test Native", "native")
+//    }
 
     @Test
     void testGrowlAppleScript() {

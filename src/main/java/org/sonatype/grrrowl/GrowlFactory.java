@@ -19,7 +19,6 @@ package org.sonatype.grrrowl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.grrrowl.impl.AppleScriptGrowl;
-import org.sonatype.grrrowl.impl.NativeGrowl;
 import org.sonatype.grrrowl.impl.NullGrowl;
 
 import java.lang.reflect.Constructor;
@@ -62,12 +61,12 @@ public class GrowlFactory
         }
 
         if (isMacOs()) {
-            try {
-                return new NativeGrowl(appName);
-            }
-            catch (Throwable t) {
-                log.trace("Could not load native impl using default", t);
-            }
+//            try {
+//                return new NativeGrowl(appName);
+//            }
+//            catch (Throwable t) {
+//                log.trace("Could not load native impl using default", t);
+//            }
 
             try {
                 return new AppleScriptGrowl(appName);

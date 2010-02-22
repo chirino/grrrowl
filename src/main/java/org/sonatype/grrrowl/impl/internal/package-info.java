@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 the original author or authors.
+ * Copyright (C) 2010 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,9 @@
  * limitations under the License.
  */
 
-package org.sonatype.grrrowl.impl.jna;
-
 /**
- * Constants for NS Cocoa muck.
+ * Growl native internals.
  *
- * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
- * @since 1.0
+ * @since 1.2
  */
-public interface NSConstants
-{
-    String NSARRAY = "NSArray";
-
-    String NSDICTIONARY = "NSDictionary";
-
-    String NSAPPLICATION = "NSApplication";
-
-    String NSMUTABLE_ARRAY = "NSMutableArray";
-
-    String NSAUTORELEASE_POOL = "NSAutoreleasePool";
-
-    String NSDISTRIBUTED_NOTIFICATION_CENTER = "NSDistributedNotificationCenter";
-}
+package org.sonatype.grrrowl.impl.internal;

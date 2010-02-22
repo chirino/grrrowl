@@ -14,12 +14,34 @@
  * limitations under the License.
  */
 
-/**
- * {@link org.sonatype.grrrowl.impl.NativeGrowl} JNA support.
- *
- * This code comes from <a href="http://www.jetbrains.org/display/IJOS/Home">Intellij IDEA Community Edition</a>
- * and has been massaged slightly.
- *
- * @since 1.0
- */
-package org.sonatype.grrrowl.impl.jna;
+#ifndef INCLUDED_PLATFORM_H
+#define INCLUDED_PLATFORM_H
+
+#ifdef HAVE_CONFIG_H
+  /* configure based build.. we will use what it discovered about the platform */
+  #include "config.h"
+#else
+  #ifdef WIN32
+    /* Windows based build */
+    #define HAVE_STDLIB_H 1
+    #define HAVE_STRINGS_H 1
+  #endif
+#endif
+
+#ifdef __APPLE__
+#import <objc/objc-runtime.h>
+#endif
+
+#ifdef HAVE_UNISTD_H
+  #include <unistd.h>
+#endif
+
+#ifdef HAVE_STDLIB_H
+  #include <stdlib.h>
+#endif
+
+#ifdef HAVE_STRINGS_H
+  #include <string.h>
+#endif
+
+#endif /* INCLUDED_PLATFORM_H */
