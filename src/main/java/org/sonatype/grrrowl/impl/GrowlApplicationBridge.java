@@ -17,6 +17,9 @@
 package org.sonatype.grrrowl.impl;
 
 import org.sonatype.hawtcocoa.foundation.NSAutoreleasePool;
+import org.sonatype.hawtcocoa.objc.ObjcClass;
+import org.sonatype.hawtcocoa.objc.ObjcObject;
+
 import static org.sonatype.hawtcocoa.objc.ObjcLibrary.*;
 
 /**
@@ -27,36 +30,33 @@ import static org.sonatype.hawtcocoa.objc.ObjcLibrary.*;
  */
 public class GrowlApplicationBridge
 {
-    private static final long CLASS;
+    private static final ObjcClass CLASS;
 
     static {
-        CLASS = objc_getClass(GrowlApplicationBridge.class.getSimpleName());
-        System.out.println("CLASS: " + CLASS);
+        CLASS = ObjcClass.forName(GrowlApplicationBridge.class.getSimpleName());
     }
 
     public static boolean isGrowlInstalled() {
         NSAutoreleasePool pool = new NSAutoreleasePool();
         try {
-            long result = $(CLASS, "isGrowlInstalled");
+            long result = $(CLASS.id(), "isGrowlInstalled");
             System.out.println("INSTALLED: " + result);
+            return result == ObjcObject.YES;
         }
         finally {
             pool.release();
         }
-
-        return true;
     }
 
     public static boolean isGrowlRunning() {
         NSAutoreleasePool pool = new NSAutoreleasePool();
         try {
-            long result = $(CLASS, "isGrowlRunning");
+            long result = $(CLASS.id(), "isGrowlRunning");
             System.out.println("RUNNING: " + result);
+            return result == ObjcObject.YES;
         }
         finally {
             pool.release();
         }
-
-        return true;
     }
 }
