@@ -17,7 +17,7 @@
 package org.sonatype.grrrowl.impl;
 
 import org.sonatype.grrrowl.Growl;
-import static org.sonatype.grrrowl.impl.internal.FoundationLibrary.*;
+import org.sonatype.hawtcocoa.foundation.NSAutoreleasePool;
 
 /**
  * HawtJNI-based interface to Growl.
@@ -28,13 +28,30 @@ import static org.sonatype.grrrowl.impl.internal.FoundationLibrary.*;
 public class NativeGrowl
     implements Growl
 {
+    private static final String GROWL_APPLICATION_REGISTRATION_NOTIFICATION = "GrowlApplicationRegistrationNotification";
+
+    private static final String GROWL_APP_NAME = "ApplicationName";
+
+    private static final String GROWL_APP_ICON = "ApplicationIcon";
+
+    private static final String GROWL_DEFAULT_NOTIFICATIONS = "DefaultNotifications";
+
+    private static final String GROWL_ALL_NOTIFICATIONS = "AllNotifications";
+
+    private static final String GROWL_NOTIFICATION_NAME = "NotificationName";
+
+    private static final String GROWL_NOTIFICATION_TITLE = "NotificationTitle";
+
+    private static final String GROWL_NOTIFICATION_DESCRIPTION = "NotificationDescription";
+
+    private static final String GROWL_NOTIFICATION = "GrowlNotification";
+
     private final String appName;
 
     private String[] notifications;
 
     private String[] enabled;
 
-    
     public NativeGrowl(final String appName) {
         assert appName != null;
         this.appName = appName;
@@ -55,22 +72,43 @@ public class NativeGrowl
     }
 
     public void register() {
-        long pool = NSAutoreleasePool$new();
+        NSAutoreleasePool pool = new NSAutoreleasePool();
         try {
             // TODO:
         }
         finally {
-            $(pool, release);
+            pool.release();
         }
     }
 
     public void notifyGrowlOf(final String notification, final String title, final String description) {
-        long pool = NSAutoreleasePool$new();
+        NSAutoreleasePool pool = new NSAutoreleasePool();
         try {
             // TODO:
         }
         finally {
-            $(pool, release);
+            pool.release();
         }
     }
+
+//    private static long fillArray(final Object[] a) {
+//        final long result = $(NSMUTABLE_ARRAY, "array");
+//        for (Object s : a) {
+//            $(result, "addObject:", convertType(s));
+//        }
+//
+//        return result;
+//    }
+//
+//    private static Object convertType(final Object o) {
+//        if (o instanceof Long) {
+//            return o;
+//        }
+//        else if (o instanceof String) {
+//            return cfString((String) o).toNative();
+//        }
+//        else {
+//            throw new IllegalArgumentException("Unsupported type: " + o.getClass());
+//        }
+//    }
 }

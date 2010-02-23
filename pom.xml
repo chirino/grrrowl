@@ -99,30 +99,6 @@
         </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>hawtjni.snapshot.fusesource.org</id>
-            <url>http://hawtjni.fusesource.org/repo/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        
-        <pluginRepository>
-            <id>hawtjni.release.fusesource.org</id>
-            <url>http://hawtjni.fusesource.org/repo/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -131,9 +107,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.fusesource.hawtjni</groupId>
-            <artifactId>hawtjni-runtime</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.sonatype.hawtcocoa</groupId>
+            <artifactId>hawtcocoa</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.sonatype.hawtcocoa</groupId>
+            <artifactId>hawtcocoa</artifactId>
+            <classifier>osx</classifier>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -179,52 +162,7 @@
     <build>
         <defaultGoal>install</defaultGoal>
 
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.fusesource.hawtjni</groupId>
-                    <artifactId>maven-hawtjni-plugin</artifactId>
-                    <version>1.0-SNAPSHOT</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
-            <plugin>
-                <groupId>org.fusesource.hawtjni</groupId>
-                <artifactId>maven-hawtjni-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                            <goal>build</goal>
-                            <goal>package-jar</goal>
-                            <goal>package-source</goal>
-                        </goals>
-                        <configuration>
-                            <callbacks>false</callbacks>
-                            <copyright><![CDATA[
-/*
- * Copyright (C) 2009 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-                            ]]></copyright>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
@@ -332,38 +270,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <!-- Profile which enables Universal binaries on OS X -->
-        <profile>
-            <id>mac</id>
-            <activation>
-                <os>
-                    <family>mac</family>
-                </os>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.fusesource.hawtjni</groupId>
-                        <artifactId>maven-hawtjni-plugin</artifactId>
-                        <configuration>
-                            <osgiPlatforms>
-                                <osgiPlatform>osname=MacOS;processor=x86-64</osgiPlatform>
-                                <osgiPlatform>osname=MacOS;processor=x86</osgiPlatform>
-                                <osgiPlatform>osname=MacOS;processor=PowerPC</osgiPlatform>
-                                <osgiPlatform>*</osgiPlatform>
-                            </osgiPlatforms>
-                            <configureArgs>
-                                <arg>--with-universal</arg>
-                            </configureArgs>
-                            <platform>osx</platform>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>
 
